@@ -71,8 +71,7 @@ public class Equipo {
     }
 
     public Equipo unirEquipos(Equipo equipo) {
-        Set<Alumno> unionDeEquipos = new HashSet<>();
-        unionDeEquipos.addAll(this.alumnos);
+        Set<Alumno> unionDeEquipos = new HashSet<>(this.alumnos);
         unionDeEquipos.addAll(equipo.alumnos);
 
         return new Equipo("Equipo fusion", unionDeEquipos);
