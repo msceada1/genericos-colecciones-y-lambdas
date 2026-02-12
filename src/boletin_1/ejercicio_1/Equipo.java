@@ -12,12 +12,7 @@ public class Equipo {
 
     public Equipo(String nombreEquipo, Set alumnos) {
         this.nombreEquipo = nombreEquipo;
-        this.alumnos = new HashSet<>();
-    }
-
-    public Equipo(String nombreEquipo) {
-        this.nombreEquipo = nombreEquipo;
-
+        this.alumnos = new HashSet<>(alumnos);
     }
 
 
@@ -88,6 +83,14 @@ public class Equipo {
         Set<Alumno> interseccionDeEquipo = new HashSet<>(this.alumnos);
         interseccionDeEquipo.retainAll(equipo.alumnos);
 
-        return new Equipo("Equioi intersectado", interseccionDeEquipo);
+        return new Equipo("Equipo intersectado", interseccionDeEquipo);
+    }
+
+    @Override
+    public String toString() {
+        return "Equipo{" +
+                "nombreEquipo='" + nombreEquipo + '\'' +
+                ", alumnos=" + alumnos +
+                '}';
     }
 }
