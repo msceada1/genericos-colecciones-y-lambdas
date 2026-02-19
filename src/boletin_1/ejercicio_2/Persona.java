@@ -115,7 +115,11 @@ public abstract class Persona {
      * @throws IESException
      */
     public void borrarMensaje(int numeroMensaje) throws IESException {
-
+        if (numeroMensaje >= 0 && numeroMensaje < mensajes.size()) {
+            mensajes.remove(numeroMensaje);
+            return;
+        }
+        throw new IESException("ERRORR: Mensaje no encontrado");
     }
 
     public void addMensajeABuzon(Mensaje mensaje) {
@@ -126,10 +130,14 @@ public abstract class Persona {
         return null;
     }
 
-
+/*
     public String buscarMensajesConTexto(String texto) throws IESException {
-        return null;
+        for (Mensaje mensaje : mensajes) {
+            if (mensaje)
+        }
     }
+
+ */
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
