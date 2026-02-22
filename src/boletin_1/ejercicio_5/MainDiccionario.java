@@ -103,7 +103,12 @@ public class MainDiccionario {
             }
         }
 
-        List<String> significados = Diccionario.buscarPalabra(palabra);
+        List<String> significados = null;
+        try {
+            significados = Diccionario.buscarPalabra(palabra);
+        } catch (DiccionarioException e) {
+            System.out.println(e.getMessage());
+        }
 
         if (significados == null) {
             System.out.println("No encuentro la palabra. Comprueba las mayúsculas y minúsculas");
@@ -127,7 +132,11 @@ public class MainDiccionario {
             }
         }
 
-        Diccionario.borrarPalabra(palabra);
+        try {
+            Diccionario.borrarPalabra(palabra);
+        } catch (DiccionarioException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void opcion4(Diccionario Diccionario) {
