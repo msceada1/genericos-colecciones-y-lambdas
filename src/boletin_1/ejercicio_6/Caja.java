@@ -33,8 +33,9 @@ public class Caja {
 
     /**
      * Metodo que se encarga de abrir la caja del Almacen
-     * @param numCaja
-     * @throws CajaException
+     *
+     * @param numCaja el numero de la caja que se desea abrir
+     * @throws CajaException si la caja ya estaba abierta
      */
     public void abrirCaja(int numCaja) throws CajaException {
         if (abierta) {
@@ -43,6 +44,12 @@ public class Caja {
         setAbierta(true);
     }
 
+    /**
+     * Metodo que se encarga de cerrar una caja del almacen
+     *
+     * @param numCaja el numero de la caja que se desea cerrar
+     * @throws CajaException si la caja esta cerrada o tiene clientes
+     */
     public void cerrarCaja(int numCaja) throws CajaException {
         if (!abierta) {
             throw new CajaException("ERROR: La caja " + numCaja + " ya esta cerrada");
@@ -53,6 +60,21 @@ public class Caja {
         setAbierta(false);
     }
 
+    /**
+     * Metodo encargado de eliminar el ultimo cliente de la caja
+     *
+     * @param numCaja la caja con la que se esta trabajando
+     * @throws CajaException si la caja está cerrada o no tiene clientes
+     */
+    public void atenderCliente(int numCaja) throws CajaException {
+        if (!abierta) {
+            throw new CajaException("Error: La caja " + numCaja + " está cerrada, no se puede atender al cliente");
+        }
+        if (clientes.isEmpty()) {
+            throw new CajaException("Error: En la caja " + numCaja + " no hay ningún cliente");
+        }
+        clientes.poll(); //elimina el ultimo de la caja
+    }
 
 
     @Override

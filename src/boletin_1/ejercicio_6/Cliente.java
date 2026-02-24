@@ -2,10 +2,12 @@ package boletin_1.ejercicio_6;
 
 public class Cliente {
 
-    private static int numeroCliente;
+    private static int contador = 1;
+    private int numeroCliente;
 
     public Cliente() {
-        this.numeroCliente++;
+        contador++;
+        this.numeroCliente = contador;
     }
 
     public int getNumeroCliente() {
