@@ -3,7 +3,7 @@ package boletin_1.ejercicio_6;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class Caja {
+public class Caja implements Comparable<Caja> {
 
     private int numCaja;
     private boolean abierta;
@@ -89,5 +89,22 @@ public class Caja {
         int result = numCaja;
         result = 31 * result + Boolean.hashCode(abierta);
         return result;
+    }
+
+    public int getClientes() {
+        return clientes.size();
+    }
+
+    public void setClientes(Queue<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    @Override
+    public int compareTo(Caja o) {
+        int res = this.getClientes() - o.getClientes();
+        if (res == 0) {
+            res = this.getNumCaja() - o.getNumCaja();
+        }
+        return res;
     }
 }

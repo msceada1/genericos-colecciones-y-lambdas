@@ -16,8 +16,10 @@ public class Almacen {
         this.cajas = new ArrayList<>(MAX_CAJAS);
     }
 
-    public void asignarCajaACliente(Cliente c) {
+    public void asignarCajaACliente(Cliente c) throws CajaException {
+        Stream<Caja> cajaAAsignar = cajas.stream();
 
+        cajaAAsignar.filter(Caja::isAbierta).min(null).orElseThrow(CajaException::new);
     }
 
     public List<Caja> getCajas() {
