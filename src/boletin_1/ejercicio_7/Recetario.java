@@ -25,6 +25,22 @@ public class Recetario {
         return listaOrdenada.toString();
     }
 
+    public StringBuilder mostrarRecetasPorIngredientes(String ingrediente) throws RecetaException {
+        StringBuilder sb = new StringBuilder();
+
+        for (Receta r : recetas.values()) {
+            if(r.necesitaIngrediente(ingrediente)) {
+                sb.append(r.getNombreReceta());
+            }
+        }
+
+        if (sb.length() == 0) {
+            throw new RecetaException("Error: no esxiste recetas con el ingrediente introducido");
+        }
+
+        return sb;
+    }
+
     public Map<String, Receta> getRecetas() {
         return recetas;
     }

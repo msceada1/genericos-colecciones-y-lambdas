@@ -117,4 +117,8 @@ public class Receta {
                 ", pasos=" + pasos +
                 '}';
     }
+
+    public Set<Ingrediente> getIngredientes() {
+        return ingredientes;
+    }
 }
