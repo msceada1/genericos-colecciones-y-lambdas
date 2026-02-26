@@ -1,33 +1,35 @@
 package boletin_1.ejercicio_7;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Recetario {
 
-    private Map<Receta, Ingrediente> recetas;
+    private Map<String, Receta> recetas;
 
-    public Recetario() {
-        this.recetas = new HashMap<>();
+
+    public void addReceta(Receta nuevaReceta) throws RecetaException {
+        if (!recetas.containsKey(nuevaReceta.getNombreReceta())) {
+            recetas.put(nuevaReceta.getNombreReceta(), nuevaReceta);
+            return;
+        }
+        throw new RecetaException("ERROR: La receta ya esxiste");
     }
 
-    public Map<Receta, Ingrediente> getRecetas() {
+    public String mostrarRecetasOrdenadasAlfabeticamente() throws RecetaException {
+        if (recetas.isEmpty()) {
+            throw new RecetaException("Error: El recetario está vacio");
+        }
+
+        List<String> listaOrdenada = new ArrayList<>(recetas.keySet());
+        listaOrdenada.sort(null);
+        return listaOrdenada.toString();
+    }
+
+    public Map<String, Receta> getRecetas() {
         return recetas;
     }
 
-    public void setRecetas(Map<Receta, Ingrediente> recetas) {
+    public void setRecetas(Map<String, Receta> recetas) {
         this.recetas = recetas;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Recetario recetario)) return false;
-        return Objects.equals(recetas, recetario.recetas);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(recetas);
     }
 }

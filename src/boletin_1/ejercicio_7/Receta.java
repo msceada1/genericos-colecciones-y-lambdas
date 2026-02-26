@@ -1,5 +1,7 @@
 package boletin_1.ejercicio_7;
 
+import boletin_1.ejercicio_6.Caja;
+
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -59,7 +61,40 @@ public class Receta {
         if (!ingredientes.remove(ingredienteABorrar)) {
             throw new RecetaException("Error: el ingrediente no se encuentra en la receta");
         }
-        pasos.removeIf(p -> p.toLowerCase().equalsIgnoreCase(ingredienteABorrar.getNombreIngrediente()));
+        pasos.removeIf(p -> p.toLowerCase().contains(ingredienteABorrar.getNombreIngrediente().toLowerCase()));
+    }
+
+    public void addPasoDetrasDeOtro(String pasoNuevo, String pasoExistente) throws RecetaException {
+        boolean encontrado = false;
+
+        for (String n : pasos) {
+            if (n.equalsIgnoreCase(pasoExistente)) {
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (encontrado) {
+            pasos.addLast(pasoNuevo);
+        } else {
+            throw new RecetaException("El paso no ha sido encontrado");
+        }
+    }
+
+    public String getNombreReceta() {
+        return nombreReceta;
+    }
+
+    public void setNombreReceta(String nombreReceta) {
+        this.nombreReceta = nombreReceta;
+    }
+
+    public int getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(int tiempo) {
+        this.tiempo = tiempo;
     }
 
     @Override
@@ -73,5 +108,13 @@ public class Receta {
         return Objects.hash(nombreReceta, tiempo, ingredientes, pasos);
     }
 
-
+    @Override
+    public String toString() {
+        return "Receta{" +
+                "nombreReceta='" + nombreReceta + '\'' +
+                ", tiempo=" + tiempo +
+                ", ingredientes=" + ingredientes +
+                ", pasos=" + pasos +
+                '}';
+    }
 }
