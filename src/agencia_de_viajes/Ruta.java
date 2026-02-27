@@ -37,12 +37,24 @@ public class Ruta {
         this.destinoFinal = destinoFinal;
     }
 
+    /**
+     * Añade una parada al conjunto de paradas
+     *
+     * @param paradaNueva la parada que se desea añadir
+     * @throws AgenciaException si la parada ya está en el Set
+     */
     public void addParada(String paradaNueva) throws AgenciaException {
         if (!paradas.add(paradaNueva)) {
             throw new AgenciaException("Error: No puedes añadir una parada que ya existe en la ruta");
         }
     }
 
+    /**
+     * Borra una parada del conjunto de paradas
+     *
+     * @param paradaABorrar la parada que se desea borrar
+     * @throws AgenciaException si la parada no esta en el Set
+     */
     public void borrarParada(String paradaABorrar) throws AgenciaException {
         if (!paradas.remove(paradaABorrar)) {
             throw new AgenciaException("Error: No puedes borrar una parada que no existe en la ruta");
