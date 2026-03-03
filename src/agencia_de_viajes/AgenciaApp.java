@@ -64,15 +64,19 @@ public class AgenciaApp {
             menu();
             int opcion = MiEntradaSalida.leerEnteroEnRango("¿Que deseas hacer?", 1, 8);
 
-            switch (opcion) {
-                case 1 -> addRutaAUnCliente(agencia, rutas);
-                case 2 -> borrarRutaDeUnCliente(agencia);
-                case 3 -> addParadaAUnaRuta(rutas);
-                case 4 -> borrarParadaDeUnaRuta(rutas);
-                case 5 -> mostrarRutasClienteOrdenadas(agencia);
-                case 6 -> mostrarClientesPorParadaEnRuta(agencia, rutas);
-                case 7 -> mostrarParadas(agencia);
-                case 8 -> enFuncionamiento = false;
+            try {
+                switch (opcion) {
+                    case 1 -> addRutaAUnCliente(agencia, rutas);
+                    case 2 -> borrarRutaDeUnCliente(agencia);
+                    case 3 -> addParadaAUnaRuta(rutas);
+                    case 4 -> borrarParadaDeUnaRuta(rutas);
+                    case 5 -> mostrarRutasClienteOrdenadas(agencia);
+                    case 6 -> mostrarClientesPorParadaEnRuta(agencia, rutas);
+                    case 7 -> mostrarParadas(agencia);
+                    case 8 -> enFuncionamiento = false;
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
 

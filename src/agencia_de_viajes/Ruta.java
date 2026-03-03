@@ -7,7 +7,7 @@ public class Ruta {
 
     private String nombre;
     private String destinoFinal;
-    Set<String> paradas;
+    private Set<String> paradas;
 
     public Ruta(String nombre, String destinoFinal) {
         this.nombre = nombre;
