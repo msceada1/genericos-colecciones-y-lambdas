@@ -2,8 +2,9 @@ package agencia_de_viajes;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente> {
 
     private static int contador = 1;
     private String nombre;
@@ -56,13 +57,30 @@ public class Cliente {
         }
     }
 
-    public String mostrarRutas() {
-        return rutas.stream().map(ruta -> ruta.getNombre() + " - " + ruta.getDestinoFinal() + " - " + ruta.paradas.stream().sorted()).toString();
-    }
-/*
-    public String listaPorParada(String nombreRuta) {
-
+    public void mostrarRutas() {
+        rutas.stream().map(r -> r.getNombre() + " - " + r.getDestinoFinal() + " - " + r.getParadas().stream().
+                sorted().collect(Collectors.joining(", "))).forEach(System.out::println);
     }
 
- */
+    public void mostrarRutasYParadas() {
+        rutas.stream().flatMap(r -> r.getParadas().stream()).sorted().forEach(System.out::println);
+    }
+
+    public Set<Ruta> getRutas() {
+        return rutas;
+    }
+
+    @Override
+    public int compareTo(Cliente o) {
+        return this.nombre.compareTo(o.getNombre());
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nombre='" + nombre + '\'' +
+                ", id=" + id +
+                ", rutas=" + rutas +
+                '}';
+    }
 }

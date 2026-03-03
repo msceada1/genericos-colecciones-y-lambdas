@@ -4,4 +4,7 @@ public class AgenciaException extends Exception {
     public AgenciaException(String message) {
         super(message);
     }
+
+    public AgenciaException() {
+    }
 }

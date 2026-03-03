@@ -60,4 +60,17 @@ public class Ruta {
             throw new AgenciaException("Error: No puedes borrar una parada que no existe en la ruta");
         }
     }
+
+    public Set<String> getParadas() {
+        return paradas;
+    }
+
+    @Override
+    public String toString() {
+        return "Ruta{" +
+                "nombre='" + nombre + '\'' +
+                ", destinoFinal='" + destinoFinal + '\'' +
+                ", paradas=" + paradas +
+                '}';
+    }
 }
