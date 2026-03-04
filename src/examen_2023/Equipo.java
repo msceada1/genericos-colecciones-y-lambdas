@@ -48,6 +48,10 @@ public class Equipo {
         return nombre.equals(equipo.nombre);
     }
 
+    public void addJugador(Jugador j) {
+        jugadores.add(j);
+    }
+
     @Override
     public int hashCode() {
         return nombre.hashCode();

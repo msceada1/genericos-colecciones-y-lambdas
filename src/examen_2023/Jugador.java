@@ -2,14 +2,14 @@ package examen_2023;
 
 import java.time.LocalDate;
 
-public class Jugador implements Comparable<Jugador>{
+public class Jugador implements Comparable<Jugador> {
 
     private String nombre;
     private LocalDate fechaNacimiento;
     private Demarcacion demarcacion;
     private String paisDeNacimiento;
 
-    public Jugador(String nombre, LocalDate fechaNacimiento, Demarcacion demarcacion, String paisDeNacimiento) throws LigaException {
+    public Jugador(String nombre, Demarcacion demarcacion, LocalDate fechaNacimiento, String paisDeNacimiento) throws LigaException {
         setNombre(nombre);
         setFechaNacimiento(fechaNacimiento);
         setDemarcacion(demarcacion);

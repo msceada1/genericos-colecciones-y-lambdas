@@ -1,5 +1,7 @@
 package examen_2023;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 public class Liga {
@@ -53,13 +55,13 @@ public class Liga {
         equipos.add(equipoAInsertar);
     }
 
-    public void eliminarEquipo(Equipo equipoAEliminar) throws LigaException {
+    public void eliminaEquipo(Equipo equipoAEliminar) throws LigaException {
         if (!equipos.remove(equipoAEliminar)) {
             throw new LigaException("No se puede eliminar un equipo que no existe");
         }
     }
 
-    public Equipo unirDosEquipos(Equipo e1, Equipo e2) throws LigaException {
+    public Equipo unirEquipos(Equipo e1, Equipo e2) throws LigaException {
         if (equipos.contains(e1) && equipos.contains(e2)) {
             Equipo equipoFusion = new Equipo("Equipo fusion");
             equipoFusion.setJugadores(e1.getJugadores());
@@ -69,7 +71,7 @@ public class Liga {
         throw new LigaException("Error: Uno de los equipos no ha sido encontrado");
     }
 
-    public List<Jugador> mostrarJugadoresEnComun(Equipo e1, Equipo e2) throws LigaException {
+    public List<Jugador> jugadoresEnComun(Equipo e1, Equipo e2) throws LigaException {
         if (!equipos.contains(e1)) {
             throw new LigaException("El equipo " + e1.getNombre() + " no se ha encontrado");
         }
@@ -93,11 +95,20 @@ public class Liga {
         return todos;
     }
 
-    public List<Jugador> ordenDeEdad() {
-        List<Jugador> jugadoresOrdenadosPorEdad =
-                todosLosJugadores().stream().sorted(Comparator.comparingInt(null)).toList();
+    public List<Jugador> jugadoresOrdenadosEdad() {
+        return todosLosJugadores().stream().sorted().toList();
+    }
 
-        return jugadoresOrdenadosPorEdad;
+    public List<Jugador> jugadoresOrdenadosNombre() {
+        return todosLosJugadores().stream().sorted(Comparator.comparing(Jugador::getNombre)).toList();
+    }
+
+    public double mediaEdad() throws LigaException {
+        if (equipos.isEmpty()) {
+            throw new LigaException("No hay equipos en la liga");
+        }
+        return todosLosJugadores().stream().mapToInt(j -> Period.between(j.getFechaNacimiento(), LocalDate.now()).getYears())
+                .average().orElse(0.0);
     }
 
 }
