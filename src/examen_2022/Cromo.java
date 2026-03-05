@@ -1,6 +1,6 @@
 package examen_2022;
 
-public abstract class Cromo {
+public abstract class Cromo implements Comparable<Cromo> {
 
     private String identificador;
 
@@ -17,5 +17,10 @@ public abstract class Cromo {
             throw new MazoException("El cromo debe tener un identificador");
         }
         this.identificador = identificador;
+    }
+
+    @Override
+    public int compareTo(Cromo o) {
+        return this.getIdentificador().compareTo(o.getIdentificador());
     }
 }
