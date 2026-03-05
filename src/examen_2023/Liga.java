@@ -96,7 +96,7 @@ public class Liga {
     }
 
     public List<Jugador> jugadoresOrdenadosEdad() {
-        return todosLosJugadores().stream().sorted().toList();
+        return todosLosJugadores().stream().sorted().toList().reversed();
     }
 
     public List<Jugador> jugadoresOrdenadosNombre() {
