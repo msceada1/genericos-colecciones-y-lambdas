@@ -7,7 +7,7 @@ public class Escudo extends Cromo {
     private int numJugadores;
 
     public Escudo(String identificador, String nombreEquipo, int yearOfFundation, int numJugadores) throws MazoException {
-        super(identificador);
+        super(identificador, nombreEquipo);
         setNombreEquipo(nombreEquipo);
         setYearOfFundation(yearOfFundation);
         setNumJugadores(numJugadores);
