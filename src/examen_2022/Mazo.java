@@ -1,9 +1,6 @@
 package examen_2022;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Mazo {
@@ -96,7 +93,13 @@ public class Mazo {
         return cromosPorEquipo.stream().filter(c -> c.getEquipo().equalsIgnoreCase(equipo));
     }
 
-    public void calcularAlturaMediaPorEquipo(String equipo) {
+    /**
+     * Calcula la media de altura de los jugadores por equipo
+     *
+     * @param equipo el equipo al que se le desea hacer la media
+     * @return la media de los jugadores del equipo deseado
+     */
+    public double calcularAlturaMediaPorEquipo(String equipo) {
         List<Cromo> clavesCromo = new ArrayList<>(cromos.keySet());
         int contador = 0;
         double sumaAlturas = 0;
@@ -107,5 +110,52 @@ public class Mazo {
                 contador++;
             }
         }
+
+        return sumaAlturas / contador;
+    }
+
+    public List<Cromo> listaDeCromos() {
+        return new ArrayList<>(cromos.keySet());
+    }
+
+    public List<Cromo> ordenacionEscudosPrimeros() {
+        List<Cromo> orden = new ArrayList<>(cromos.keySet());
+
+        for (Cromo c : orden) {
+            if (c instanceof Escudo) {
+                orden.add(c);
+            }
+        }
+
+        for (Cromo c : orden) {
+            if (c instanceof Jugador) {
+                orden.add(c);
+            }
+        }
+
+        return orden;
+    }
+
+    public List<Cromo> ordenacionEscudoPrimerosPorNombre() {
+        List<Cromo> orden = new ArrayList<>(cromos.keySet());
+
+        for (Cromo c : orden) {
+            if (c instanceof Escudo) {
+                orden.add(c);
+                orden.sort(Comparator.comparing(Cromo::getEquipo));
+            }
+        }
+
+        List<Cromo> orden2 = new ArrayList<>(cromos.keySet());
+
+        for (Cromo c : orden) {
+            if (c instanceof Jugador) {
+                orden2.add(c);
+                orden2.sort(Comparator.comparing(Cromo::getEquipo));
+            }
+        }
+
+        orden.addAll(orden2);
+        return orden2;
     }
 }
