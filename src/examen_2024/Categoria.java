@@ -1,14 +1,8 @@
 package examen_2024;
 
-import java.time.LocalDate;
-import java.time.Year;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Categoria {
 
@@ -35,27 +29,22 @@ public class Categoria {
         this.nombre = nombre;
     }
 
-    /**
-     * Inserta un producto siempre que no esté
-     *
-     * @param producto el producto a aniadir
-     * @throws TiendaException si el producto a aniadir ya existe
-     */
-    public void addProducto(Producto producto) throws TiendaException {
-        if (!this.productos.add(producto)) {
-            throw new TiendaException("No se puede añadir un producto que ya existe");
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Categoria categoria)) return false;
+        return Objects.equals(nombre, categoria.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(nombre);
+    }
+
+    public void addProducto(Producto producto) {
+        productos.add(producto);
     }
 
     public void eliminarProducto(Producto producto) {
-        this.productos.remove(producto);
-    }
-
-    public Stream<Producto> productosUltimoAnio() {
-        return productos.stream().filter(p -> p.getFechaIncorporacion().isAfter(LocalDate.now().minus(1, ChronoUnit.YEARS)));
-    }
-
-    public Stream<Producto> productosOrdenadoPorPrecio() {
-        return productos.stream().sorted(Comparator.comparingDouble(Producto::getPrecio).reversed());
+        productos.remove(producto);
     }
 }
