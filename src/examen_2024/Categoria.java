@@ -1,7 +1,14 @@
 package examen_2024;
 
+import java.time.LocalDate;
+import java.time.Year;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Categoria {
 
@@ -11,6 +18,10 @@ public class Categoria {
     public Categoria(String nombre) throws TiendaException {
         setNombre(nombre);
         this.productos = new HashSet<>();
+    }
+
+    public Set<Producto> getProductos() {
+        return productos;
     }
 
     public String getNombre() {
@@ -38,5 +49,13 @@ public class Categoria {
 
     public void eliminarProducto(Producto producto) {
         this.productos.remove(producto);
+    }
+
+    public Stream<Producto> productosUltimoAnio() {
+        return productos.stream().filter(p -> p.getFechaIncorporacion().isAfter(LocalDate.now().minus(1, ChronoUnit.YEARS)));
+    }
+
+    public Stream<Producto> productosOrdenadoPorPrecio() {
+        return productos.stream().sorted(Comparator.comparingDouble(Producto::getPrecio).reversed());
     }
 }
