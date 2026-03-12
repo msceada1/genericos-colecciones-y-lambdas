@@ -138,6 +138,8 @@ public class Juego {
     public void personajeConMasAtaques() throws DBException {
         int maxAtaques = personajes.stream().mapToInt(p -> p.getAtaques().size()).max().
                 orElseThrow(() -> new DBException("No hay personaje"));
+
+        System.out.println(personajes.stream().filter(p -> p.getAtaques().size() == maxAtaques));
     }
 
     public void todosLosAtaquesOrdenadosNombre() {

@@ -3,7 +3,7 @@ package examen_2025;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Personaje implements Comparable<Personaje>{
+public class Personaje implements Comparable<Personaje> {
 
     private String nombre;
     private TRaza TRaza;
@@ -97,5 +97,9 @@ public class Personaje implements Comparable<Personaje>{
     @Override
     public int compareTo(Personaje o) {
         return this.getAtaques().size() - o.getAtaques().size();
+    }
+
+    public void addAtaque(Ataque ataque) {
+        ataques.add(ataque);
     }
 }
