@@ -124,8 +124,7 @@ public class Juego {
     }
 
     public Personaje buscarPersonaje(String nombre, TRaza raza) throws DBException {
-        return personajes.stream().filter(p -> p.getNombre().equalsIgnoreCase(nombre) &&
-                p.getRaza().equals(raza)).findFirst().orElseThrow(() -> new DBException("personaje no encontrado"));
+        return personajes.stream().filter(p -> p.getNombre().equalsIgnoreCase(nombre) && p.getRaza().equals(raza)).findFirst().orElseThrow(() -> new DBException("personaje no encontrado"));
     }
 
 
@@ -136,8 +135,7 @@ public class Juego {
     }
 
     public void personajeConMasAtaques() throws DBException {
-        int maxAtaques = personajes.stream().mapToInt(p -> p.getAtaques().size()).max().
-                orElseThrow(() -> new DBException("No hay personaje"));
+        int maxAtaques = personajes.stream().mapToInt(p -> p.getAtaques().size()).max().orElseThrow(() -> new DBException("No hay personaje"));
 
         System.out.println(personajes.stream().filter(p -> p.getAtaques().size() == maxAtaques));
     }
@@ -151,15 +149,12 @@ public class Juego {
     }
 
     public Ataque ataqueMasDañino(Personaje p1, Personaje p2) throws DBException {
-            if (!p1.isVivo() || !p2.isVivo()){
-                throw new DBException("Uno de los dos personajes esta muerto");
-            }
+        if (!p1.isVivo() || !p2.isVivo()) {
+            throw new DBException("Uno de los dos personajes esta muerto");
+        }
 
 
-            return p1.getAtaques().stream()
-                    .filter(ataque -> ataque.getKi() <= p1.getNivelDeKi())
-                    .max((a1, a2) -> a2.getDanio() - a1.getDanio())
-                    .orElseThrow(() -> new DBException("No puedes hacer ningun ataque"));
+        return p1.getAtaques().stream().filter(ataque -> ataque.getKi() <= p1.getNivelDeKi()).max((a1, a2) -> a2.getDanio() - a1.getDanio()).orElseThrow(() -> new DBException("No puedes hacer ningun ataque"));
 
     }
 
@@ -168,7 +163,9 @@ public class Juego {
     }
 
     public void eliminarAtaquesInferioresANivel(int nivel) {
-
+        for (Personaje p : personajes) {
+            p.getAtaques().removeIf(a -> a.getPerfeccion() < nivel); //alvaro tonto
+        }
     }
 
     public Map<TRaza, List<Personaje>> devuelveMapaRazas() {
