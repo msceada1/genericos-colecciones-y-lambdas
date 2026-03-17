@@ -151,6 +151,15 @@ public class Juego {
     }
 
     public Ataque ataqueMasDañino(Personaje p1, Personaje p2) throws DBException {
+            if (!p1.isVivo() || !p2.isVivo()){
+                throw new DBException("Uno de los dos personajes esta muerto");
+            }
+
+
+            return p1.getAtaques().stream()
+                    .filter(ataque -> ataque.getKi() <= p1.getNivelDeKi())
+                    .max((a1, a2) -> a2.getDanio() - a1.getDanio())
+                    .orElseThrow(() -> new DBException("No puedes hacer ningun ataque"));
 
     }
 
